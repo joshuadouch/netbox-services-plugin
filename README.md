@@ -3,11 +3,9 @@
 Manage services such as web and mail hosts in Netbox
 
 ### Installation
-Clone and install plugin
 ```
-$ git clone https://github.com/joshuadouch/netbox-services-plugin.git
 $ cd /opt/netbox && source /opt/netbox/venv/bin/activate
-(venv) $ sudo /opt/netbox/venv/bin/pip install -e /path/to/netbox-services-plugin/
+(venv) $ sudo /opt/netbox/venv/bin/python -m pip install git+https://github.com/joshuadouch/netbox-services-plugin
 ```
 Add plugin to configuration
 ```
@@ -25,5 +23,5 @@ cd /opt/netbox && python netbox/manage.py migrate
 ```
 Restart Netbox
 ```
-sudo systemctl restart netbox
+sudo systemctl restart netbox netbox-rq
 ```
