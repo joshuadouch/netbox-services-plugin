@@ -2,8 +2,8 @@ from netbox.views import generic
 from django.db.models import CharField, Value, Count
 from django.db.models.functions import Concat
 from netbox_services.models import WebServer, Website, MailDomain, Mailbox
-from netbox_services.tables import WebServerTable, WebsiteTable, MailDomainTable, MailboxTable
-from netbox_services.forms import WebServerForm, WebsiteForm, MailDomainForm, MailboxForm, WebServerImportForm, WebsiteImportForm, MailDomainImportForm, MailboxImportForm, SimpleMailboxTable
+from netbox_services.tables import WebServerTable, WebsiteTable, MailDomainTable, MailboxTable, SimpleMailboxTable
+from netbox_services.forms import WebServerForm, WebsiteForm, MailDomainForm, MailboxForm, WebServerImportForm, WebsiteImportForm, MailDomainImportForm, MailboxImportForm
 
 class WebServerView(generic.ObjectView):
     queryset = WebServer.objects.all()
