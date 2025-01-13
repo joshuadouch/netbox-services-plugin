@@ -19,3 +19,11 @@ PLUGINS=[
 ]
 ...
 ```
+Run migrations
+```
+cd /opt/netbox && python netbox/manage.py migrate
+```
+Restart Netbox
+```
+sudo systemctl restart netbox
+```
