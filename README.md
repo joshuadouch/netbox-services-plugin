@@ -1,8 +1,8 @@
-## Netbox Services plugin
+## NetBox Services
 
-Manage services such as web and mail hosts in Netbox
+Manage services such as web and mail hosts in NetBox
 
-### Installation
+### Install / upgrade
 ```
 $ cd /opt/netbox && source /opt/netbox/venv/bin/activate
 (venv) $ sudo /opt/netbox/venv/bin/python -m pip install git+https://github.com/joshuadouch/netbox-services-plugin
