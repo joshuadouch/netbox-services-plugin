@@ -14,6 +14,11 @@ webserver_menu_item = PluginMenuItem(
             _("Add"),
             "mdi mdi-plus-thick",
         ),
+        PluginMenuButton(
+            "plugins:netbox_services:webserver_bulk_import",
+            _("Import"),
+            "mdi mdi-upload",
+        ),
     ),
 )
 
@@ -25,6 +30,11 @@ website_menu_item = PluginMenuItem(
             "plugins:netbox_services:website_add",
             _("Add"),
             "mdi mdi-plus-thick",
+        ),
+        PluginMenuButton(
+            "plugins:netbox_services:website_bulk_import",
+            _("Import"),
+            "mdi mdi-upload",
         ),
     ),
 )
@@ -38,6 +48,11 @@ maildomain_menu_item = PluginMenuItem(
             _("Add"),
             "mdi mdi-plus-thick",
         ),
+        PluginMenuButton(
+            "plugins:netbox_services:maildomain_bulk_import",
+            _("Import"),
+            "mdi mdi-upload",
+        ),
     ),
 )
 
@@ -49,6 +64,11 @@ mailbox_menu_item = PluginMenuItem(
             "plugins:netbox_services:mailbox_add",
             _("Add"),
             "mdi mdi-plus-thick",
+        ),
+        PluginMenuButton(
+            "plugins:netbox_services:mailbox_bulk_import",
+            _("Import"),
+            "mdi mdi-upload",
         ),
     ),
 )

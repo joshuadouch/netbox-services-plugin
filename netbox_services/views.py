@@ -1,12 +1,14 @@
 from netbox.views import generic
-from . import forms, models, tables
 from django.db.models import CharField, Value, Count
 from django.db.models.functions import Concat
+from netbox_services.models import WebServer, Website, MailDomain, Mailbox
+from netbox_services.tables import WebServerTable, WebsiteTable, MailDomainTable, MailboxTable
+from netbox_services.forms import WebServerForm, WebsiteForm, MailDomainForm, MailboxForm, WebServerImportForm, WebsiteImportForm, MailDomainImportForm, MailboxImportForm
 
 class WebServerView(generic.ObjectView):
-    queryset = models.WebServer.objects.all()
+    queryset = WebServer.objects.all()
     def get_extra_context(self, request, instance):
-        table = tables.WebsiteTable(instance.websites.all())
+        table = WebsiteTable(instance.websites.all())
         table.configure(request)
 
         return {
@@ -14,15 +16,48 @@ class WebServerView(generic.ObjectView):
         }
 
 class WebServerListView(generic.ObjectListView):
-    queryset = models.WebServer.objects.annotate(
+    queryset = WebServer.objects.annotate(
         site_count=Count('websites')
     )
-    table = tables.WebServerTable
+    table = WebServerTable
+
+class WebServerEditView(generic.ObjectEditView):
+    queryset = WebServer.objects.all()
+    form = WebServerForm
+
+class WebServerDeleteView(generic.ObjectDeleteView):
+    queryset = WebServer.objects.all()
+
+class WebServerBulkImportView(generic.BulkImportView):
+    queryset = WebServer.objects.all()
+    model_form = WebServerImportForm
+    table = WebServerTable
+    default_return_url = "plugins:netbox_services:webserver_list"
+
+class WebsiteView(generic.ObjectView):
+    queryset = Website.objects.all()
+
+class WebsiteListView(generic.ObjectListView):
+    queryset = Website.objects.all()
+    table = WebsiteTable
+
+class WebsiteEditView(generic.ObjectEditView):
+    queryset = Website.objects.all()
+    form = WebsiteForm
+
+class WebsiteDeleteView(generic.ObjectDeleteView):
+    queryset = Website.objects.all()
+
+class WebsiteBulkImportView(generic.BulkImportView):
+    queryset = Website.objects.all()
+    model_form = WebsiteImportForm
+    table = WebsiteTable
+    default_return_url = "plugins:netbox_services:website_list"
 
 class MailDomainView(generic.ObjectView):
-    queryset = models.MailDomain.objects.all()
+    queryset = MailDomain.objects.all()
     def get_extra_context(self, request, instance):
-        table = tables.SimpleMailboxTable(instance.mailboxes.all())
+        table = SimpleMailboxTable(instance.mailboxes.all())
         table.configure(request)
 
         return {
@@ -30,51 +65,42 @@ class MailDomainView(generic.ObjectView):
         }
 
 class MailDomainListView(generic.ObjectListView):
-    queryset = models.MailDomain.objects.annotate(
+    queryset = MailDomain.objects.annotate(
         mailbox_count=Count('mailboxes')
     )
-    table = tables.MailDomainTable
-
-class WebServerEditView(generic.ObjectEditView):
-    queryset = models.WebServer.objects.all()
-    form = forms.WebServerForm
-
-class WebServerDeleteView(generic.ObjectDeleteView):
-    queryset = models.WebServer.objects.all()
+    table = MailDomainTable
 
 class MailDomainEditView(generic.ObjectEditView):
-    queryset = models.MailDomain.objects.all()
-    form = forms.MailDomainForm
+    queryset = MailDomain.objects.all()
+    form = MailDomainForm
 
 class MailDomainDeleteView(generic.ObjectDeleteView):
-    queryset = models.MailDomain.objects.all()
+    queryset = MailDomain.objects.all()
 
-class WebsiteView(generic.ObjectView):
-    queryset = models.Website.objects.all()
-
-class WebsiteListView(generic.ObjectListView):
-    queryset = models.Website.objects.all()
-    table = tables.WebsiteTable
-
-class WebsiteEditView(generic.ObjectEditView):
-    queryset = models.Website.objects.all()
-    form = forms.WebsiteForm
-
-class WebsiteDeleteView(generic.ObjectDeleteView):
-    queryset = models.Website.objects.all()
+class MailDomainBulkImportView(generic.BulkImportView):
+    queryset = MailDomain.objects.all()
+    model_form = MailDomainImportForm
+    table = MailDomainTable
+    default_return_url = "plugins:netbox_services:maildomain_list"
 
 class MailboxView(generic.ObjectView):
-    queryset = models.Mailbox.objects.all()
+    queryset = Mailbox.objects.all()
 
 class MailboxListView(generic.ObjectListView):
-    queryset = models.Mailbox.objects.annotate(
+    queryset = Mailbox.objects.annotate(
         fqda=Concat('local_part', Value('@'), 'mail_domain__mail_domain', output_field=CharField())
     )
-    table = tables.MailboxTable
+    table = MailboxTable
 
 class MailboxEditView(generic.ObjectEditView):
-    queryset = models.Mailbox.objects.all()
-    form = forms.MailboxForm
+    queryset = Mailbox.objects.all()
+    form = MailboxForm
 
 class MailboxDeleteView(generic.ObjectDeleteView):
-    queryset = models.Mailbox.objects.all()
+    queryset = Mailbox.objects.all()
+
+class MailboxBulkImportView(generic.BulkImportView):
+    queryset = Mailbox.objects.all()
+    model_form = MailboxImportForm
+    table = MailboxTable
+    default_return_url = "plugins:netbox_services:mailbox_list"

@@ -7,6 +7,7 @@ urlpatterns = (
     # Web servers
     path('web-servers/', views.WebServerListView.as_view(), name='webserver_list'),
     path('web-servers/add/', views.WebServerEditView.as_view(), name='webserver_add'),
+    path('web-servers/import/', views.WebServerBulkImportView.as_view(), name='webserver_bulk_import'),
     path('web-servers/<int:pk>/', views.WebServerView.as_view(), name='webserver'),
     path('web-servers/<int:pk>/edit/', views.WebServerEditView.as_view(), name='webserver_edit'),
     path('web-servers/<int:pk>/delete/', views.WebServerDeleteView.as_view(), name='webserver_delete'),
@@ -17,6 +18,7 @@ urlpatterns = (
     # Web server sites
     path('websites/', views.WebsiteListView.as_view(), name='website_list'),
     path('websites/add/', views.WebsiteEditView.as_view(), name='website_add'),
+    path('websites/import/', views.WebsiteBulkImportView.as_view(), name='website_bulk_import'),
     path('websites/<int:pk>/', views.WebsiteView.as_view(), name='website'),
     path('websites/<int:pk>/edit/', views.WebsiteEditView.as_view(), name='website_edit'),
     path('websites/<int:pk>/delete/', views.WebsiteDeleteView.as_view(), name='website_delete'),
@@ -27,6 +29,7 @@ urlpatterns = (
     # Mail domains
     path('mail-domains/', views.MailDomainListView.as_view(), name='maildomain_list'),
     path('mail-domains/add/', views.MailDomainEditView.as_view(), name='maildomain_add'),
+    path('mail-domains/import/', views.MailDomainBulkImportView.as_view(), name='maildomain_bulk_import'),
     path('mail-domains/<int:pk>/', views.MailDomainView.as_view(), name='maildomain'),
     path('mail-domains/<int:pk>/edit/', views.MailDomainEditView.as_view(), name='maildomain_edit'),
     path('mail-domains/<int:pk>/delete/', views.MailDomainDeleteView.as_view(), name='maildomain_delete'),
@@ -37,6 +40,7 @@ urlpatterns = (
     # Mailboxes
     path('mailboxes/', views.MailboxListView.as_view(), name='mailbox_list'),
     path('mailboxes/add/', views.MailboxEditView.as_view(), name='mailbox_add'),
+    path('mailboxes/import/', views.MailboxBulkImportView.as_view(), name='mailbox_bulk_import'),
     path('mailboxes/<int:pk>/', views.MailboxView.as_view(), name='mailbox'),
     path('mailboxes/<int:pk>/edit/', views.MailboxEditView.as_view(), name='mailbox_edit'),
     path('mailboxes/<int:pk>/delete/', views.MailboxDeleteView.as_view(), name='mailbox_delete'),

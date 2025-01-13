@@ -30,7 +30,7 @@ class WebsiteTable(NetBoxTable):
             'pk', 'id', 'web_server', 'domain', 'type', 'description', 'actions',
         )
         default_columns = (
-            'web_server', 'domain', 'type', 'actions',
+            'domain', 'web_server', 'type', 'actions',
         )
 
 class MailDomainTable(NetBoxTable):
