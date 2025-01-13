@@ -1,0 +1,27 @@
+[project]
+name = "netbox-services-plugin"
+version = "0.1"
+description = "Netbox Services is a Netbox plugin for managing web and mail hosts."
+authors = [
+    {name="Josh Douch", email="me@joshdouch.me"},
+]
+license = {file="LICENCE"}
+readme = "README.md"
+keywords = ["netbox", "netbox-plugin"]
+classifiers = [
+    "Development Status :: 3 - Alpha"
+]
+dependencies = []
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/joshuadouch/netbox-services-plugin/"
+Repository = "https://github.com/joshuadouch/netbox-services-plugin/"
+Issues = "https://github.com/joshuadouch/netbox-services-plugin/issues"
+
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools.package-data]
+"netbox_dns" = ["templates/**/*.html"]
