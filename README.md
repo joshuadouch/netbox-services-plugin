@@ -25,3 +25,7 @@ Restart Netbox
 ```
 sudo systemctl restart netbox netbox-rq
 ```
+### Screenshots
+
+![image](https://github.com/user-attachments/assets/a65343f6-bd2b-4cea-9764-883dbf1739cf)
+![image](https://github.com/user-attachments/assets/3c173da3-6328-4ea2-8319-456fc23ab352)
