@@ -3,7 +3,8 @@ from django.db.models import CharField, Value, Count
 from django.db.models.functions import Concat
 from netbox_services.models import WebServer, Website, MailDomain, Mailbox
 from netbox_services.tables import WebServerTable, WebsiteTable, MailDomainTable, MailboxTable, SimpleMailboxTable
-from netbox_services.forms import WebServerForm, WebsiteForm, MailDomainForm, MailboxForm, WebServerImportForm, WebsiteImportForm, MailDomainImportForm, MailboxImportForm
+from netbox_services.forms import WebServerForm, WebServerFilterForm, WebsiteForm, WebsiteFilterForm, MailDomainForm, MailDomainFilterForm, MailboxForm, MailboxFilterForm, WebServerImportForm, WebsiteImportForm, MailDomainImportForm, MailboxImportForm
+from netbox_services.filtersets import WebServerFilterSet, WebsiteFilterSet, MailboxFilterSet, MailDomainFilterSet
 
 class WebServerView(generic.ObjectView):
     queryset = WebServer.objects.all()
@@ -20,6 +21,8 @@ class WebServerListView(generic.ObjectListView):
         site_count=Count('websites')
     )
     table = WebServerTable
+    filterset = WebServerFilterSet
+    filterset_form = WebServerFilterForm
 
 class WebServerEditView(generic.ObjectEditView):
     queryset = WebServer.objects.all()
@@ -40,6 +43,8 @@ class WebsiteView(generic.ObjectView):
 class WebsiteListView(generic.ObjectListView):
     queryset = Website.objects.all()
     table = WebsiteTable
+    filterset = WebsiteFilterSet
+    filterset_form = WebsiteFilterForm
 
 class WebsiteEditView(generic.ObjectEditView):
     queryset = Website.objects.all()
@@ -69,6 +74,8 @@ class MailDomainListView(generic.ObjectListView):
         mailbox_count=Count('mailboxes')
     )
     table = MailDomainTable
+    filterset = MailDomainFilterSet
+    filterset_form = MailDomainFilterForm
 
 class MailDomainEditView(generic.ObjectEditView):
     queryset = MailDomain.objects.all()
@@ -91,6 +98,8 @@ class MailboxListView(generic.ObjectListView):
         fqda=Concat('local_part', Value('@'), 'mail_domain__mail_domain', output_field=CharField())
     )
     table = MailboxTable
+    filterset = MailboxFilterSet
+    filterset_form = MailboxFilterForm
 
 class MailboxEditView(generic.ObjectEditView):
     queryset = Mailbox.objects.all()

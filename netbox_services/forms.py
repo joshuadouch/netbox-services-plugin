@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from virtualization.models import VirtualMachine
 from utilities.forms.fields import CommentField, DynamicModelChoiceField, CSVModelChoiceField, CSVChoiceField
-from netbox.forms import NetBoxModelForm, NetBoxModelImportForm
+from netbox.forms import NetBoxModelForm, NetBoxModelImportForm, NetBoxModelFilterSetForm
 from .models import WebServer, Website, MailDomain, Mailbox, TypeChoices
 
 class WebServerForm(NetBoxModelForm):
@@ -37,6 +37,13 @@ class WebServerImportForm(NetBoxModelImportForm):
         fields = (
             'name', 'host_server', 'comments', 'tags',
         )
+
+class WebServerFilterForm(NetBoxModelFilterSetForm):
+    model = WebServer
+    host_server = DynamicModelChoiceField(
+        queryset=VirtualMachine.objects.all(),
+        required=False
+    )
 
 class WebsiteForm(NetBoxModelForm):
     web_server = DynamicModelChoiceField(
@@ -78,6 +85,18 @@ class WebsiteImportForm(NetBoxModelImportForm):
             'domain', 'web_server', 'type', 'description', 'tags',
         )
 
+class WebsiteFilterForm(NetBoxModelFilterSetForm):
+    model = Website
+    web_server = DynamicModelChoiceField(
+        queryset=WebServer.objects.all(),
+        required=False
+    )
+    type = forms.MultipleChoiceField(
+        choices=TypeChoices,
+        required=False
+    )
+
+
 class MailDomainForm(NetBoxModelForm):
 
     comments = CommentField()
@@ -85,6 +104,13 @@ class MailDomainForm(NetBoxModelForm):
     class Meta:
         model = MailDomain
         fields = ('mail_domain', 'comments', 'tags')
+
+class MailDomainFilterForm(NetBoxModelFilterSetForm):
+    model = MailDomain
+    mail_domain = DynamicModelChoiceField(
+        queryset=MailDomain.objects.all(),
+        required=False
+    )
 
 class MailDomainImportForm(NetBoxModelImportForm):
 
@@ -109,6 +135,13 @@ class MailboxForm(NetBoxModelForm):
         fields = (
             'local_part', 'mail_domain', 'description', 'tags',
         )
+
+class MailboxFilterForm(NetBoxModelFilterSetForm):
+    model = Mailbox
+    mail_domain = DynamicModelChoiceField(
+        queryset=MailDomain.objects.all(),
+        required=False
+    )
 
 class MailboxImportForm(NetBoxModelImportForm):
 
