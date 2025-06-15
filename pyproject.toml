@@ -1,6 +1,6 @@
 [project]
 name = "netbox-services-plugin"
-version = "0.2.2"
+version = "0.2.3"
 description = "Netbox Services is a Netbox plugin for managing web and mail hosts."
 authors = [
     {name="Josh Douch", email="me@joshdouch.me"},
